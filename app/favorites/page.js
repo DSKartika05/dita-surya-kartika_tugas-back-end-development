@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import UserCard from "@/components/UserCard";
-import { useFavorites } from "@/context/FavoriteContext";
+import { useFavorite } from "@/context/FavoriteContext";
 
 export default function FavoritesPage() {
-  const { favorites } = useFavorites();
+  const { favorites } = useFavorite();
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">

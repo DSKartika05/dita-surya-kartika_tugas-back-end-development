@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
-import { useFavorites } from "@/context/FavoriteContext";
+import { useFavorite } from "@/context/FavoriteContext";
 import { useUser } from "@/context/UserContext";
 
 import { cn } from "@/lib/utils";
@@ -26,7 +26,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { favoritesCount } = useFavorites();
+  const { favoritesCount } = useFavorite();
   const { name, submitted } = useUser();
 
   function closeMenu() {

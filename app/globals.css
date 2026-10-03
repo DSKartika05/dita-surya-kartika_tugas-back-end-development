@@ -30,6 +30,7 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
 
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -94,7 +95,9 @@
   --warm: oklch(0.67 0.15 40);
   --warm-foreground: oklch(0.98 0.01 60);
 
+  /* Destructive — Red */
   --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 60);
 
   --border: oklch(0.87 0.025 150);
   --input: oklch(0.87 0.025 150);
@@ -154,6 +157,7 @@
   --warm: oklch(0.68 0.15 40);
   --warm-foreground: oklch(0.98 0.01 60);
 
+  /* Destructive — Red */
   --destructive: oklch(0.68 0.21 25);
   --destructive-foreground: oklch(0.98 0.01 60);
 
@@ -250,14 +254,20 @@
     background-size: 40px 40px;
   }
 
-  /* Fade the grid toward the edges */
-  .bg-radial-fade {
-    mask-image: radial-gradient(
-      ellipse at center,
-      black 20%,
-      transparent 75%
-    );
-  }
+/* Fade the grid toward the edges */
+.bg-radial-fade {
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black 20%,
+    transparent 75%
+  );
+
+  mask-image: radial-gradient(
+    ellipse at center,
+    black 20%,
+    transparent 75%
+  );
+}
 
   /* Gradient text */
   .text-gradient {
