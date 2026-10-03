@@ -1,6 +1,11 @@
-import { favorites } from "@/lib/db";
+import {
+  getAllFavorites,
+  addFavorite,
+} from "@/lib/services/favoriteService";
 
 export async function GET() {
+  const favorites = getAllFavorites();
+
   return Response.json(favorites);
 }
 
@@ -9,37 +14,23 @@ export async function POST(request) {
 
   try {
     body = await request.json();
-  } catch {
+  } catch (error) {
     return Response.json(
-      { error: "Request body tidak boleh kosong" },
+      { error: "Format JSON tidak valid" },
       { status: 400 }
     );
   }
 
-  if (!body || Object.keys(body).length === 0) {
+  const result = addFavorite(body);
+
+  if (!result.success) {
     return Response.json(
-      { error: "Request body tidak boleh kosong" },
-      { status: 400 }
+      { error: result.error },
+      { status: result.status }
     );
   }
 
-  if (!body.id || !body.name) {
-    return Response.json(
-      { error: "id dan name wajib diisi" },
-      { status: 400 }
-    );
-  }
-
-  const alreadyExists = favorites.some((f) => f.id === body.id);
-
-  if (alreadyExists) {
-    return Response.json(
-      { error: "User ini sudah difavoritkan" },
-      { status: 400 }
-    );
-  }
-
-  favorites.push(body);
-
-  return Response.json(body, { status: 201 });
+  return Response.json(result.data, {
+    status: result.status,
+  });
 }
