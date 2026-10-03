@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Heart } from "lucide-react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -31,6 +32,7 @@ export default function UserCard({ user }) {
           <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/40 to-primary/10 text-sm font-semibold">
             {initials}
           </div>
+
           <CardTitle>{user.name}</CardTitle>
         </div>
       </CardHeader>
@@ -39,14 +41,12 @@ export default function UserCard({ user }) {
         <p className="text-sm text-muted-foreground">{user.email}</p>
 
         <div className="mt-4 flex gap-2">
-          <a
-            href={`https://jsonplaceholder.typicode.com/users/${user.id}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={`/users/${user.id}`}
             className={cn(buttonVariants(), "flex-1 rounded-full")}
           >
             View Profile
-          </a>
+          </Link>
 
           <Button
             variant={favorited ? "secondary" : "outline"}

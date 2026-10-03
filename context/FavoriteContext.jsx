@@ -27,45 +27,50 @@ export function FavoriteProvider({ children }) {
   }
 
   async function removeFavorite(userId) {
-    const res = await fetch(`/api/favorites/${userId}`, { method: "DELETE" });
+    const res = await fetch(`/api/favorites/${userId}`, {
+      method: "DELETE",
+    });
 
     if (res.ok) {
       setFavorites((prev) => prev.filter((f) => f.id !== userId));
     }
   }
 
-async function updateFavorite(userId, note) {
-  const res = await fetch(`/api/favorites/${userId}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ note }),
-  });
+  async function updateFavorite(userId, note) {
+    const res = await fetch(`/api/favorites/${userId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ note }),
+    });
 
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.error || "Gagal mengubah favorite");
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.error || "Gagal mengubah favorite");
+    }
+
+    const updated = await res.json();
+
+    setFavorites((prev) =>
+      prev.map((f) => (f.id === userId ? updated : f))
+    );
+
+    return updated;
   }
-
-  const updated = await res.json();
-
-  setFavorites((prev) =>
-    prev.map((f) => (f.id === userId ? updated : f))
-  );
-
-  return updated;
-}
 
   function isFavorite(userId) {
     return favorites.some((f) => f.id === userId);
   }
 
+  const favoritesCount = favorites.length;
+
   const value = {
-  favorites,
-  addFavorite,
-  removeFavorite,
-  updateFavorite,
-  isFavorite,
-};
+    favorites,
+    favoritesCount,
+    addFavorite,
+    removeFavorite,
+    updateFavorite,
+    isFavorite,
+  };
 
   return (
     <FavoriteContext.Provider value={value}>
@@ -74,10 +79,17 @@ async function updateFavorite(userId, note) {
   );
 }
 
-export function useFavorite() {
+export function useFavorites() {
   const context = useContext(FavoriteContext);
+
   if (context === undefined) {
-    throw new Error("useFavorite harus dipakai di dalam <FavoriteProvider>");
+    throw new Error(
+      "useFavorites harus dipakai di dalam <FavoriteProvider>"
+    );
   }
+
   return context;
 }
+
+// Alias agar component lama yang masih menggunakan useFavorite tetap bekerja
+export const useFavorite = useFavorites;
