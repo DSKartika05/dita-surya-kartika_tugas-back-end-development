@@ -1,31 +1,31 @@
 import { CheckCircle2 } from "lucide-react";
 
 const values = [
-  "Simple and maintainable front-end solutions",
-  "Responsive interface with a focus on usability",
-  "Practical implementation of modern React concepts",
+  "Simple and maintainable back-end solutions",
+  "Clear API structure with proper request validation",
+  "Practical implementation of Next.js back-end concepts",
 ];
 
 const stats = [
-  { value: "10", label: "Users in directory" },
-  { value: "7", label: "Main pages" },
-  { value: "2", label: "Theme modes" },
+  { value: "4", label: "API HTTP methods" },
+  { value: "3", label: "API endpoints" },
+  { value: "2", label: "Data resources" },
   { value: "10+", label: "Implemented features" },
 ];
 
 const features = [
-  "Multi-page navigation with Next.js App Router",
-  "User Directory with data fetched from JSONPlaceholder",
-  "Display user profiles in a responsive grid",
-  "Real-time search by user name",
-  "Add and remove users from Favorites",
-  "Global favorite state with React Context",
-  "Favorite counter displayed in the Navbar",
-  "Favorite data persisted with LocalStorage",
-  "Loading and error states for API requests",
-  "Dark and Light Mode with saved theme preference",
-  "Contact form with personalized greeting",
-  "Reusable and responsive UI components",
+  "Next.js Route Handler for building custom API endpoints",
+  "GET endpoint for retrieving user profile data",
+  "GET endpoint for retrieving favorite users",
+  "POST endpoint for adding users to Favorites",
+  "PATCH endpoint for updating favorite user notes",
+  "DELETE endpoint for removing users from Favorites",
+  "Dynamic API route with /api/favorites/[id]",
+  "Request body validation and error handling",
+  "Duplicate favorite validation before creating data",
+  "In-memory data management through lib/db.js",
+  "Server Action for deleting messages",
+  "revalidatePath() to refresh data after server mutations",
 ];
 
 export default function AboutPage() {
@@ -34,7 +34,6 @@ export default function AboutPage() {
       <div className="bg-grid bg-radial-fade absolute inset-0 -z-10" />
 
       <div className="mx-auto max-w-6xl px-6 py-20">
-
         {/* About */}
         <div className="grid gap-16 md:grid-cols-2 md:items-center">
           <div>
@@ -43,14 +42,16 @@ export default function AboutPage() {
             </p>
 
             <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
-              A Front-End Development Assignment
+              A Back-End Development Assignment
             </h1>
 
             <p className="mt-6 max-w-xl leading-7 text-muted-foreground">
               Userly is a user directory web application developed as a
-              Front-End Development assignment for the <span className="font-medium text-foreground">
+              Back-End Development assignment for the{" "}
+              <span className="font-medium text-foreground">
                 Perempuan Inovasi 2026
-              </span>{" "}program.
+              </span>{" "}
+              program.
             </p>
 
             <p className="mt-4 max-w-xl leading-7 text-muted-foreground">
@@ -58,9 +59,9 @@ export default function AboutPage() {
               <span className="font-medium text-foreground">
                 Dita Surya Kartika
               </span>{" "}
-              to apply fundamental front-end development concepts using
-              Next.js, React, Tailwind CSS, React Context, API integration,
-              and browser-based data persistence.
+              to apply back-end development concepts using Next.js Route
+              Handlers, REST API methods, request validation, server actions,
+              and server-side data management.
             </p>
 
             <ul className="mt-8 space-y-3">
@@ -98,67 +99,75 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Tech Stack */}
+        {/* Tech Stack & Concepts */}
         <div className="mt-24">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold text-primary">
-              Tech Stack & Concepts
+              Tech Stack &amp; Concepts
             </p>
 
             <h2 className="mt-2 text-3xl font-bold tracking-tight">
-              Built with modern front-end tools
+              Built with modern back-end tools
             </h2>
 
             <p className="mt-4 text-muted-foreground">
-              Userly combines several front-end technologies and concepts
-              learned throughout the assignment.
+              Userly combines Next.js back-end features with REST API concepts
+              and server-side data handling learned throughout the assignment.
             </p>
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-white/10 bg-foreground/[0.03] p-6">
-              <h3 className="font-semibold">Framework</h3>
+              <h3 className="font-semibold">Route Handler</h3>
+
               <p className="mt-2 text-sm text-muted-foreground">
-                Next.js with the App Router for page routing and application
-                structure.
+                Next.js Route Handlers are used to create custom API endpoints
+                inside the application.
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-foreground/[0.03] p-6">
-              <h3 className="font-semibold">Library</h3>
+              <h3 className="font-semibold">REST API</h3>
+
               <p className="mt-2 text-sm text-muted-foreground">
-                React with useState, useEffect, and Custom Context for
-                interactive features and state management.
+                GET, POST, PATCH, and DELETE methods are implemented to handle
+                different data operations.
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-foreground/[0.03] p-6">
-              <h3 className="font-semibold">Styling</h3>
+              <h3 className="font-semibold">API Validation</h3>
+
               <p className="mt-2 text-sm text-muted-foreground">
-                Tailwind CSS with reusable components based on shadcn/ui.
+                Request bodies are validated and API errors return appropriate
+                response messages and status codes.
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-foreground/[0.03] p-6">
-              <h3 className="font-semibold">API</h3>
+              <h3 className="font-semibold">Data Management</h3>
+
               <p className="mt-2 text-sm text-muted-foreground">
-                JSONPlaceholder Users API as the source for user directory
-                data.
+                Favorite users and messages are managed through an in-memory
+                data module in lib/db.js.
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-foreground/[0.03] p-6">
-              <h3 className="font-semibold">Persistence</h3>
+              <h3 className="font-semibold">Server Actions</h3>
+
               <p className="mt-2 text-sm text-muted-foreground">
-                LocalStorage keeps favorite users and theme preferences after
-                refreshing the browser.
+                Server Actions handle server-side mutations such as deleting
+                messages directly from the application.
               </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-foreground/[0.03] p-6">
-              <h3 className="font-semibold">Typography</h3>
+              <h3 className="font-semibold">Revalidation</h3>
+
               <p className="mt-2 text-sm text-muted-foreground">
-                Plus Jakarta Sans loaded through Next.js local font support.
+                revalidatePath() is used to refresh the messages page after a
+                successful server-side mutation.
               </p>
             </div>
           </div>
@@ -176,7 +185,7 @@ export default function AboutPage() {
             </h2>
 
             <p className="mt-4 text-muted-foreground">
-              The project brings together the front-end concepts implemented
+              The project brings together the back-end concepts implemented
               throughout the assignment.
             </p>
           </div>
@@ -196,7 +205,6 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

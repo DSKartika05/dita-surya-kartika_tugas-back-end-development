@@ -18,6 +18,7 @@ const links = [
   { href: "/services", label: "Services" },
   { href: "/profile", label: "Profile" },
   { href: "/contact", label: "Contact" },
+  { href: "/messages", label: "Messages"},
   { href: "/users", label: "Users" },
   { href: "/favorites", label: "Favorites" },
 ];
@@ -35,19 +36,19 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-4 z-50 mx-auto w-full max-w-6xl px-4">
-      <nav className="rounded-full border border-white/10 bg-background/70 px-4 py-2 shadow-lg shadow-black/20 backdrop-blur-xl">
+      <nav className="rounded-full border border-primary/20 bg-primary px-4 py-2 text-primary-foreground shadow-lg shadow-primary/20 dark:border-white/10 dark:bg-[#10251b] dark:text-white dark:shadow-black/20">
         {/* Top Navbar */}
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/"
             onClick={closeMenu}
-            className="shrink-0 text-sm font-bold tracking-[0.15em] text-primary"
+            className="shrink-0 text-sm font-bold tracking-[0.15em] text-white transition-opacity hover:opacity-80"
           >
             USERLY
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden items-center gap-1 text-sm text-muted-foreground lg:flex">
+          <div className="hidden items-center gap-1 text-sm text-primary-foreground/80 dark:text-white/75 lg:flex">
             {links.map((link) => {
               const isActive =
                 link.href === "/"
@@ -59,17 +60,19 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "rounded-full px-3 py-1.5 transition-colors hover:text-foreground",
-                    isActive && "bg-primary/10 text-primary"
+                    "rounded-full px-3 py-1.5 transition-colors",
+                    "hover:bg-white/10 hover:text-white",
+                    isActive && "bg-white/15 text-white"
                   )}
                 >
                   {link.label}
 
-                  {link.href === "/favorites" && favoritesCount > 0 && (
-                    <span className="ml-1.5 rounded-full bg-primary/15 px-1.5 py-0.5 text-xs text-primary">
-                      {favoritesCount}
-                    </span>
-                  )}
+                  {link.href === "/favorites" &&
+                    favoritesCount > 0 && (
+                      <span className="ml-1.5 rounded-full bg-white/15 px-1.5 py-0.5 text-xs text-white">
+                        {favoritesCount}
+                      </span>
+                    )}
                 </Link>
               );
             })}
@@ -78,7 +81,7 @@ export default function Navbar() {
           {/* Right Side */}
           <div className="flex items-center gap-2">
             {submitted && (
-              <span className="hidden text-sm text-muted-foreground sm:inline">
+              <span className="hidden text-sm text-primary-foreground/80 dark:text-white/70 sm:inline">
                 Hi, {name} 👋
               </span>
             )}
@@ -89,7 +92,7 @@ export default function Navbar() {
               href="/contact"
               className={cn(
                 buttonVariants({ size: "sm" }),
-                "hidden rounded-full sm:inline-flex"
+                "hidden rounded-full bg-white text-primary hover:bg-white/90 sm:inline-flex dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
               )}
             >
               Sign Up / Login
@@ -101,7 +104,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
-              className="flex size-9 items-center justify-center rounded-full border border-white/10 text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary lg:hidden"
+              className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 lg:hidden"
             >
               {menuOpen ? (
                 <X className="size-4" />
@@ -122,7 +125,7 @@ export default function Navbar() {
           )}
         >
           <div className="overflow-hidden">
-            <div className="mt-3 border-t border-white/10 pt-3 pb-2">
+            <div className="mt-3 border-t border-white/15 pb-2 pt-3">
               <div className="flex flex-col gap-1">
                 {links.map((link) => {
                   const isActive =
@@ -136,15 +139,16 @@ export default function Navbar() {
                       href={link.href}
                       onClick={closeMenu}
                       className={cn(
-                        "flex items-center justify-between rounded-xl px-4 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-primary/5 hover:text-foreground",
-                        isActive && "bg-primary/10 text-primary"
+                        "flex items-center justify-between rounded-xl px-4 py-2.5 text-sm text-primary-foreground/80 transition-colors dark:text-white/75",
+                        "hover:bg-white/10 hover:text-white",
+                        isActive && "bg-white/15 text-white"
                       )}
                     >
                       <span>{link.label}</span>
 
                       {link.href === "/favorites" &&
                         favoritesCount > 0 && (
-                          <span className="rounded-full bg-primary/15 px-2 py-0.5 text-xs text-primary">
+                          <span className="rounded-full bg-white/15 px-2 py-0.5 text-xs text-white">
                             {favoritesCount}
                           </span>
                         )}
@@ -155,7 +159,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={closeMenu}
-                  className="mt-2 flex items-center justify-center rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                  className="mt-2 flex items-center justify-center rounded-full bg-white px-4 py-2.5 text-sm font-medium text-primary transition-opacity hover:bg-white/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
                 >
                   Sign Up / Login
                 </Link>

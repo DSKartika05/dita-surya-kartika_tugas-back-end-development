@@ -51,18 +51,18 @@ export default function UserProfilePage({ params }) {
 
   if (loading) {
     return (
-      <main className="mx-auto max-w-6xl px-6 py-20">
-        <div className="py-16 text-center text-muted-foreground">
+      <main className="flex min-h-[70vh] items-center justify-center bg-background px-6">
+        <p className="animate-pulse text-muted-foreground">
           Loading profile...
-        </div>
+        </p>
       </main>
     );
   }
 
   if (error || !user) {
     return (
-      <main className="mx-auto max-w-6xl px-6 py-20">
-        <div className="py-16 text-center">
+      <main className="flex min-h-[70vh] items-center justify-center bg-background px-6">
+        <div className="w-full max-w-lg rounded-2xl border border-destructive/30 bg-destructive/10 p-8 text-center">
           <h1 className="text-2xl font-bold">
             User not found
           </h1>
@@ -89,60 +89,64 @@ export default function UserProfilePage({ params }) {
     .toUpperCase();
 
   return (
-    <main className="relative">
-      <div className="pointer-events-none absolute inset-0 bg-grid bg-radial-fade" />
+    <main className="bg-background">
+      {/* PROFILE HEADER */}
+      <section className="relative overflow-hidden border-b border-border bg-primary/[0.07]">
+        <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
 
-      <div className="relative mx-auto max-w-5xl px-6 py-16">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-[320px] w-[650px] -translate-x-1/2 rounded-full bg-primary/15 blur-[120px]" />
 
-        {/* Back */}
-        <Link
-          href="/users"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
-        >
-          <ArrowLeft className="size-4" />
-          Back to Users
-        </Link>
+        <div className="relative mx-auto max-w-5xl px-6 pb-12 pt-8 md:pb-14 md:pt-10">
+          <Link
+            href="/users"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+          >
+            <ArrowLeft className="size-4" />
+            Back to Users
+          </Link>
 
-        {/* Profile Header */}
-        <Card className="border border-white/10 bg-foreground/[0.03]">
-          <CardContent className="p-8 md:p-10">
-            <div className="flex flex-col items-center text-center md:flex-row md:items-center md:text-left">
-              <div className="flex size-24 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/40 to-primary/10 text-3xl font-bold text-primary">
-                {initials}
-              </div>
-
-              <div className="mt-5 md:ml-6 md:mt-0">
-                <p className="text-sm font-semibold text-primary">
-                  User Profile
-                </p>
-
-                <h1 className="mt-1 text-3xl font-bold tracking-tight">
-                  {user.name}
-                </h1>
-
-                <p className="mt-1 text-muted-foreground">
-                  @{user.username}
-                </p>
-              </div>
+          <div className="mt-10 flex flex-col items-center text-center md:flex-row md:items-center md:text-left">
+            <div className="flex size-24 shrink-0 items-center justify-center rounded-full bg-primary/10 text-3xl font-bold text-primary ring-1 ring-primary/20">
+              {initials}
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Contact Information + Address */}
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="mt-5 md:ml-6 md:mt-0">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                User Profile
+              </p>
 
+              <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">
+                {user.name}
+              </h1>
+
+              <p className="mt-1 text-muted-foreground">
+                @{user.username}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-5xl px-6 py-12 md:py-14">
+        {/* CONTACT + ADDRESS */}
+        <div className="grid gap-6 md:grid-cols-2">
           {/* Contact */}
-          <Card className="border border-white/10 bg-foreground/[0.03]">
+          <Card className="border-border bg-card">
             <CardHeader>
-              <CardTitle>Contact Information</CardTitle>
+              <p className="text-sm font-semibold text-primary">
+                Contact
+              </p>
+
+              <CardTitle className="mt-1">
+                Contact Information
+              </CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-5">
-
               <div className="flex items-start gap-3">
                 <Mail className="mt-0.5 size-5 shrink-0 text-primary" />
 
-                <div>
+                <div className="min-w-0">
                   <p className="text-xs text-muted-foreground">
                     Email
                   </p>
@@ -180,18 +184,22 @@ export default function UserProfilePage({ params }) {
                   </p>
                 </div>
               </div>
-
             </CardContent>
           </Card>
 
           {/* Address */}
-          <Card className="border border-white/10 bg-foreground/[0.03]">
+          <Card className="border-border bg-card">
             <CardHeader>
-              <CardTitle>Address</CardTitle>
+              <p className="text-sm font-semibold text-primary">
+                Location
+              </p>
+
+              <CardTitle className="mt-1">
+                Address
+              </CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-5">
-
               <div className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-5 shrink-0 text-primary" />
 
@@ -235,23 +243,26 @@ export default function UserProfilePage({ params }) {
                   {user.address.zipcode}
                 </p>
               </div>
-
             </CardContent>
           </Card>
         </div>
 
-        {/* Location + Company */}
+        {/* LOCATION + COMPANY */}
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-
           {/* Location */}
-          <Card className="border border-white/10 bg-foreground/[0.03]">
+          <Card className="border-violet-500/20 bg-violet-500/[0.04]">
             <CardHeader>
-              <CardTitle>Location</CardTitle>
+              <p className="text-sm font-semibold text-violet-500 dark:text-violet-400">
+                Coordinates
+              </p>
+
+              <CardTitle className="mt-1">
+                Location
+              </CardTitle>
             </CardHeader>
 
             <CardContent className="grid grid-cols-2 gap-4">
-
-              <div className="rounded-xl border border-white/10 bg-foreground/[0.03] p-4">
+              <div className="rounded-xl border border-violet-500/15 bg-card p-4">
                 <p className="text-xs text-muted-foreground">
                   Latitude
                 </p>
@@ -261,7 +272,7 @@ export default function UserProfilePage({ params }) {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-foreground/[0.03] p-4">
+              <div className="rounded-xl border border-violet-500/15 bg-card p-4">
                 <p className="text-xs text-muted-foreground">
                   Longitude
                 </p>
@@ -270,18 +281,22 @@ export default function UserProfilePage({ params }) {
                   {user.address.geo.lng}
                 </p>
               </div>
-
             </CardContent>
           </Card>
 
           {/* Company */}
-          <Card className="border border-white/10 bg-foreground/[0.03]">
+          <Card className="border-violet-500/20 bg-violet-500/[0.04]">
             <CardHeader>
-              <CardTitle>Company</CardTitle>
+              <p className="text-sm font-semibold text-violet-500 dark:text-violet-400">
+                Organization
+              </p>
+
+              <CardTitle className="mt-1">
+                Company
+              </CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-5">
-
               <div>
                 <p className="text-xs text-muted-foreground">
                   Company Name
@@ -311,13 +326,12 @@ export default function UserProfilePage({ params }) {
                   {user.company.bs}
                 </p>
               </div>
-
             </CardContent>
           </Card>
         </div>
 
-        {/* User ID */}
-        <div className="mt-6 rounded-2xl border border-white/10 bg-foreground/[0.03] p-5">
+        {/* USER ID */}
+        <div className="mt-6 rounded-2xl border border-border bg-muted px-5 py-4">
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">
               User ID
@@ -328,7 +342,6 @@ export default function UserProfilePage({ params }) {
             </span>
           </div>
         </div>
-
       </div>
     </main>
   );

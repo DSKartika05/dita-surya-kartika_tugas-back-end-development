@@ -36,14 +36,16 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
-      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      className="flex size-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:border-white/30 hover:bg-black/10 hover:text-white dark:hover:border-white/10 dark:hover:bg-white/20 dark:hover:text-white"
+      aria-label={
+        darkMode ? "Switch to light mode" : "Switch to dark mode"
+      }
     >
-      {darkMode ? (
-        <Sun className="size-4" />
-      ) : (
-        <Moon className="size-4" />
-      )}
+    {darkMode ? (
+      <Sun className="size-4" />
+    ) : (
+      <Moon className="size-4" />
+    )}
     </button>
   );
 }
